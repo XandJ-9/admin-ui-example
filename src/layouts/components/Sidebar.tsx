@@ -38,11 +38,11 @@ const Sidebar: React.FC<SidebarProps> = ({
         theme={{
           components: {
             Menu: {
-              colorItemBg: 'transparent',
-              colorSubItemBg: 'transparent',
-              colorItemBgActive: isLightSidebar ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.08)',
-              colorItemBgSelected: isLightSidebar ? 'var(--ant-color-primary-bg)' : 'var(--ant-color-primary)',
-              colorItemTextSelected: isLightSidebar ? 'var(--ant-color-primary)' : '#fff',
+              itemBg: 'transparent',
+              subMenuItemBg: 'transparent',
+              itemActiveBg: isLightSidebar ? 'rgba(0, 0, 0, 0.06)' : 'rgba(255, 255, 255, 0.08)',
+              itemSelectedBg: isLightSidebar ? 'var(--ant-color-primary-bg)' : 'var(--ant-color-primary)',
+              itemSelectedColor: isLightSidebar ? 'var(--ant-color-primary)' : '#fff',
             },
           },
         }}
