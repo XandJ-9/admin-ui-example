@@ -1,14 +1,10 @@
-// Mock Data Service
-// This file separates data fetching from view components.
-
-import { User, Role, mockUsers as initialUsers, mockRoles as initialRoles } from './mockData';
-
-export type { User, Role };
+import { User, Role, Menu } from '../types';
+import { mockUsers as initialUsers, mockRoles as initialRoles, mockMenus } from './mockData';
 
 let mockUsers: User[] = [...initialUsers];
 let mockRoles: Role[] = [...initialRoles];
 
-export const api = {
+export const systemMockApi = {
   // User Management
   getUsers: async (): Promise<User[]> => {
     return new Promise((resolve) => setTimeout(() => resolve([...mockUsers]), 300));
@@ -78,4 +74,11 @@ export const api = {
       }, 300);
     });
   },
+
+  // Menu Management
+  getMenus: async (): Promise<Menu[]> => {
+    return new Promise((resolve) => {
+      setTimeout(() => resolve(mockMenus), 500);
+    });
+  }
 };

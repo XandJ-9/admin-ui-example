@@ -5,7 +5,7 @@ import { SearchOutlined, ImportOutlined, DownloadOutlined } from '@ant-design/ic
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { attendanceService } from '../../services/attendanceService';
-import { AttendanceRecord } from '../../services/mockData';
+import { AttendanceRecord } from '../../types';
 
 const DailyAttendance: React.FC = () => {
   const [date, setDate] = useState(dayjs());

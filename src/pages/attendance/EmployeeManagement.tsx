@@ -5,7 +5,7 @@ import { SearchOutlined, ImportOutlined, PlusOutlined, UserOutlined, ClockCircle
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
 import { attendanceService } from '../../services/attendanceService';
-import { EmployeeRecord } from '../../services/mockData';
+import { EmployeeRecord } from '../../types';
 
 const EmployeeManagement: React.FC = () => {
   const [dataSource, setDataSource] = useState<EmployeeRecord[]>([]);

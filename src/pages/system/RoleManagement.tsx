@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Space, Tag, Modal, Form, Input, Select, message, Card } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { api, Role } from '../../services/api';
+import { systemService } from '../../services/systemService';
+import { Role } from '../../types';
 
 const { Option } = Select;
 const { TextArea } = Input;
@@ -17,7 +18,7 @@ const RoleManagement: React.FC = () => {
   const fetchRoles = async () => {
     setLoading(true);
     try {
-      const data = await api.getRoles();
+      const data = await systemService.getRoles();
       setRoles(data);
     } catch (error) {
       message.error('获取角色列表失败');
@@ -56,7 +57,7 @@ const RoleManagement: React.FC = () => {
       content: '确定要删除该角色吗？',
       onOk: async () => {
         try {
-          await api.deleteRole(id);
+          await systemService.deleteRole(id);
           message.success('删除成功');
           fetchRoles();
         } catch (error) {
@@ -70,10 +71,10 @@ const RoleManagement: React.FC = () => {
     try {
       const values = await form.validateFields();
       if (editingRole) {
-        await api.updateRole(editingRole.id, values);
+        await systemService.updateRole(editingRole.id, values);
         message.success('更新成功');
       } else {
-        await api.addRole(values);
+        await systemService.addRole(values);
         message.success('添加成功');
       }
       setIsModalVisible(false);

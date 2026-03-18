@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { Table, Card, DatePicker, Space, Button, message } from 'antd';
 import dayjs from 'dayjs';
 import { attendanceService } from '../../services/attendanceService';
-import { MonthlySummaryRecord } from '../../services/mockData';
+import { MonthlySummaryRecord } from '../../types';
 
 const MonthlySummary: React.FC = () => {
   const [data, setData] = useState<MonthlySummaryRecord[]>([]);

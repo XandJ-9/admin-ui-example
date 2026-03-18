@@ -11,7 +11,7 @@ import {
 } from '@ant-design/icons';
 import * as Icons from '@ant-design/icons';
 import { systemService } from '../../services/systemService';
-import { Menu } from '../../services/mockData';
+import { Menu } from '../../types';
 
 const MenuManagement: React.FC = () => {
   const [dataSource, setDataSource] = useState<Menu[]>([]);

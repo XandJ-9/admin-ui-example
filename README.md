@@ -41,15 +41,19 @@
 
 ```text
 src/
+├── api/               # 真实的后端 API 请求接口 (使用 axios)
 ├── assets/            # 静态资源文件 (图片、全局样式等)
 ├── components/        # 全局公共组件
 ├── contexts/          # React Context (如 ThemeContext 主题状态管理)
 ├── layouts/           # 页面布局组件 (Sidebar, Header 等)
+├── mock/              # 模拟数据与 Mock 请求逻辑
 ├── pages/             # 页面级组件
 │   ├── system/        # 系统管理模块 (用户、角色等)
 │   ├── attendance/    # 业务样例模块 (考勤管理)
 │   └── dashboard/     # 仪表盘/首页
-├── services/          # API 请求与数据服务层
+├── services/          # 业务逻辑服务层 (统一对外提供接口，内部区分 Mock 或真实 API)
+├── types/             # 全局 TypeScript 类型定义
+├── utils/             # 工具函数 (如 axios 请求封装 request.ts)
 ├── App.tsx            # 应用根组件与路由配置
 └── main.tsx           # 项目入口文件
 ```

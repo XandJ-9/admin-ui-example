@@ -1,87 +1,49 @@
-// src/services/attendanceService.ts
 import { 
   AttendanceRecord, 
   AttendanceRequest, 
   MonthlySummaryRecord, 
-  EmployeeRecord,
-  mockAttendanceRecords as initialRecords, 
-  mockAttendanceRequests as initialRequests, 
-  mockMonthlySummary as initialSummary,
-  mockEmployees as initialEmployees
-} from './mockData';
-
-let mockAttendanceRecords: AttendanceRecord[] = [...initialRecords];
-let mockAttendanceRequests: AttendanceRequest[] = [...initialRequests];
-let mockMonthlySummary: MonthlySummaryRecord[] = [...initialSummary];
-let mockEmployees: EmployeeRecord[] = [...initialEmployees];
+  EmployeeRecord 
+} from '../types';
+import { attendanceMockApi } from '../mock/attendanceMock';
+import { attendanceApi } from '../api/attendanceApi';
+import { USE_MOCK } from './config';
 
 export const attendanceService = {
   // Daily Attendance
   getDailyAttendance: async (): Promise<AttendanceRecord[]> => {
-    return new Promise((resolve) => setTimeout(() => resolve([...mockAttendanceRecords]), 300));
+    return USE_MOCK ? attendanceMockApi.getDailyAttendance() : attendanceApi.getDailyAttendance();
   },
   addAttendanceRecords: async (records: AttendanceRecord[]): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        mockAttendanceRecords = [...records, ...mockAttendanceRecords];
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.addAttendanceRecords(records) : attendanceApi.addAttendanceRecords(records);
   },
 
   // Attendance Requests
   getAttendanceRequests: async (): Promise<AttendanceRequest[]> => {
-    return new Promise((resolve) => setTimeout(() => resolve([...mockAttendanceRequests]), 300));
+    return USE_MOCK ? attendanceMockApi.getAttendanceRequests() : attendanceApi.getAttendanceRequests();
   },
   addAttendanceRequest: async (request: AttendanceRequest): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        mockAttendanceRequests = [request, ...mockAttendanceRequests];
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.addAttendanceRequest(request) : attendanceApi.addAttendanceRequest(request);
   },
 
   // Monthly Summary
   getMonthlySummary: async (): Promise<MonthlySummaryRecord[]> => {
-    return new Promise((resolve) => setTimeout(() => resolve([...mockMonthlySummary]), 300));
+    return USE_MOCK ? attendanceMockApi.getMonthlySummary() : attendanceApi.getMonthlySummary();
   },
 
-  // Employee Management (Merged)
+  // Employee Management
   getEmployees: async (): Promise<EmployeeRecord[]> => {
-    return new Promise((resolve) => setTimeout(() => resolve([...mockEmployees]), 300));
+    return USE_MOCK ? attendanceMockApi.getEmployees() : attendanceApi.getEmployees();
   },
   addEmployee: async (employee: EmployeeRecord): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        mockEmployees = [employee, ...mockEmployees];
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.addEmployee(employee) : attendanceApi.addEmployee(employee);
   },
   updateEmployee: async (key: string, data: Partial<EmployeeRecord>): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        const index = mockEmployees.findIndex(e => e.key === key);
-        if (index !== -1) mockEmployees[index] = { ...mockEmployees[index], ...data };
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.updateEmployee(key, data) : attendanceApi.updateEmployee(key, data);
   },
   deleteEmployee: async (key: string): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        mockEmployees = mockEmployees.filter(e => e.key !== key);
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.deleteEmployee(key) : attendanceApi.deleteEmployee(key);
   },
   batchAddEmployees: async (employees: EmployeeRecord[]): Promise<void> => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        mockEmployees = [...employees, ...mockEmployees];
-        resolve();
-      }, 300);
-    });
+    return USE_MOCK ? attendanceMockApi.batchAddEmployees(employees) : attendanceApi.batchAddEmployees(employees);
   },
 };

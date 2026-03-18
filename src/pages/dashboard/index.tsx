@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Statistic } from 'antd';
 import { UserOutlined, SafetyCertificateOutlined, AppstoreOutlined } from '@ant-design/icons';
-import { api } from '../../services/api';
+import { systemService } from '../../services/systemService';
 
 export default function Dashboard() {
   const [stats, setStats] = useState({ users: 0, roles: 0, modules: 5 });
@@ -11,8 +11,8 @@ export default function Dashboard() {
     const fetchStats = async () => {
       try {
         const [users, roles] = await Promise.all([
-          api.getUsers(),
-          api.getRoles()
+          systemService.getUsers(),
+          systemService.getRoles()
         ]);
         
         setStats(prev => ({

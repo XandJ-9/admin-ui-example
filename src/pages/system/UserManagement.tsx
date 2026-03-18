@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { Table, Button, Space, Tag, Modal, Form, Input, Select, message, Card } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { api, User } from '../../services/api';
+import { systemService } from '../../services/systemService';
+import { User } from '../../types';
 
 const { Option } = Select;
 
@@ -16,7 +17,7 @@ const UserManagement: React.FC = () => {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const data = await api.getUsers();
+      const data = await systemService.getUsers();
       setUsers(data);
     } catch (error) {
       message.error('获取用户列表失败');
@@ -55,7 +56,7 @@ const UserManagement: React.FC = () => {
       content: '确定要删除该用户吗？',
       onOk: async () => {
         try {
-          await api.deleteUser(id);
+          await systemService.deleteUser(id);
           message.success('删除成功');
           fetchUsers();
         } catch (error) {
@@ -69,10 +70,10 @@ const UserManagement: React.FC = () => {
     try {
       const values = await form.validateFields();
       if (editingUser) {
-        await api.updateUser(editingUser.id, values);
+        await systemService.updateUser(editingUser.id, values);
         message.success('更新成功');
       } else {
-        await api.addUser(values);
+        await systemService.addUser(values);
         message.success('添加成功');
       }
       setIsModalVisible(false);

@@ -3,7 +3,7 @@ import { Layout, theme } from 'antd';
 import { Link, useLocation } from 'react-router-dom';
 import * as Icons from '@ant-design/icons';
 import { systemService } from '../services/systemService';
-import { Menu as MenuType } from '../services/mockData';
+import { Menu as MenuType } from '../types';
 import Sidebar from './components/Sidebar';
 import Header from './components/Header';
 
