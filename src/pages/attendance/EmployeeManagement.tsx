@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Tag, DatePicker, Space, Input, Button, Upload, message, Modal, Form, Switch, TimePicker } from 'antd';
+import { Table, Card, Tag, DatePicker, Space, Input, Button, Upload, App, Modal, Form, Switch, TimePicker } from 'antd';
 import { SearchOutlined, ImportOutlined, PlusOutlined, UserOutlined, ClockCircleOutlined, DownloadOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
@@ -8,6 +7,7 @@ import { attendanceService } from '../../services/attendanceService';
 import { EmployeeRecord } from '../../types';
 
 const EmployeeManagement: React.FC = () => {
+  const { message, modal } = App.useApp();
   const [dataSource, setDataSource] = useState<EmployeeRecord[]>([]);
   const [loading, setLoading] = useState(false);
 
@@ -94,7 +94,7 @@ const EmployeeManagement: React.FC = () => {
   };
 
   const handleDelete = (key: string) => {
-    Modal.confirm({
+    modal.confirm({
       title: '确认删除',
       content: '确定要删除该员工吗？',
       onOk: async () => {

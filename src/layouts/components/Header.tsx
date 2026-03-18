@@ -1,7 +1,9 @@
 import React from 'react';
-import { Layout, Button, Breadcrumb, Tooltip, Popover, Space, Divider } from 'antd';
-import { MenuUnfoldOutlined, MenuFoldOutlined, SunOutlined, MoonOutlined, BgColorsOutlined, CheckOutlined } from '@ant-design/icons';
+import { Layout, Button, Breadcrumb, Tooltip, Popover, Space, Divider, App } from 'antd';
+import { MenuUnfoldOutlined, MenuFoldOutlined, SunOutlined, MoonOutlined, BgColorsOutlined, CheckOutlined, LogoutOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 import { useTheme, PREDEFINED_COLORS, PREDEFINED_SIDEBAR_COLORS } from '../../contexts/ThemeContext';
+import { authService } from '../../services/authService';
 
 const { Header: AntHeader } = Layout;
 
@@ -22,7 +24,21 @@ const Header: React.FC<HeaderProps> = ({
   breadcrumbs,
   colorBgContainer,
 }) => {
+  const { message } = App.useApp();
   const { mode, toggleTheme, colorPrimary, setColorPrimary, sidebarColor, setSidebarColor } = useTheme();
+  const navigate = useNavigate();
+  const user = authService.getUser();
+
+  const handleLogout = async () => {
+    try {
+      await authService.logout();
+      message.success('已退出登录');
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout failed:', error);
+      message.error('退出登录失败');
+    }
+  };
 
   const colorContent = (
     <div className="w-56 p-2">
@@ -98,8 +114,15 @@ const Header: React.FC<HeaderProps> = ({
             className="flex items-center justify-center"
           />
         </Tooltip>
-        <span className="hidden sm:inline text-gray-500 ml-2">欢迎, 管理员</span>
-        <Button type="link">退出</Button>
+        <span className="hidden sm:inline text-gray-500 ml-2">欢迎, {user?.nickname || '用户'}</span>
+        <Button 
+          type="link" 
+          icon={<LogoutOutlined />} 
+          onClick={handleLogout}
+          className="flex items-center"
+        >
+          退出
+        </Button>
       </div>
     </AntHeader>
   );

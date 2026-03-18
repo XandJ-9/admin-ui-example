@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useEffect, useState } from 'react';
 import { Card, Col, Row, Statistic } from 'antd';
 import { UserOutlined, SafetyCertificateOutlined, AppstoreOutlined } from '@ant-design/icons';

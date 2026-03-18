@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL || '/api',
   timeout: 10000,
   headers: {
     'Content-Type': 'application/json',
@@ -12,6 +12,10 @@ const request = axios.create({
 request.interceptors.request.use(
   (config) => {
     // Add token or other custom headers here if needed
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
     return config;
   },
   (error) => {
@@ -27,6 +31,9 @@ request.interceptors.response.use(
   },
   (error) => {
     // Handle global errors here
+    if (error.response && error.response.status === 401) {
+      console.error('Unauthorized! Please check your authentication token or backend configuration.');
+    }
     return Promise.reject(error);
   }
 );

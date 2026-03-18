@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Button, Space, Tag, Modal, Form, Input, Select, message, Card } from 'antd';
+import { Table, Button, Space, Tag, Modal, Form, Input, Select, App, Card } from 'antd';
 import { PlusOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { systemService } from '../../services/systemService';
 import { Role } from '../../types';
@@ -9,6 +8,7 @@ const { Option } = Select;
 const { TextArea } = Input;
 
 const RoleManagement: React.FC = () => {
+  const { message, modal } = App.useApp();
   const [roles, setRoles] = useState<Role[]>([]);
   const [loading, setLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -52,7 +52,7 @@ const RoleManagement: React.FC = () => {
   }, [isModalVisible, editingRole, form]);
 
   const handleDelete = (id: number) => {
-    Modal.confirm({
+    modal.confirm({
       title: '确认删除',
       content: '确定要删除该角色吗？',
       onOk: async () => {

@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Tag, DatePicker, Space, Input, Button, Upload, message } from 'antd';
+import { Table, Card, Tag, DatePicker, Space, Input, Button, Upload, App } from 'antd';
 import { SearchOutlined, ImportOutlined, DownloadOutlined } from '@ant-design/icons';
 import dayjs from 'dayjs';
 import * as XLSX from 'xlsx';
@@ -8,6 +7,7 @@ import { attendanceService } from '../../services/attendanceService';
 import { AttendanceRecord } from '../../types';
 
 const DailyAttendance: React.FC = () => {
+  const { message } = App.useApp();
   const [date, setDate] = useState(dayjs());
   const [dataSource, setDataSource] = useState<AttendanceRecord[]>([]);
   const [loading, setLoading] = useState(false);

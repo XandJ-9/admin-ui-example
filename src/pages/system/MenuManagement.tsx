@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Tag, Button, Space, message, Tooltip } from 'antd';
+import { Table, Card, Tag, Button, Space, App, Tooltip } from 'antd';
 import { 
   PlusOutlined, 
   EditOutlined, 
@@ -14,6 +13,7 @@ import { systemService } from '../../services/systemService';
 import { Menu } from '../../types';
 
 const MenuManagement: React.FC = () => {
+  const { message } = App.useApp();
   const [dataSource, setDataSource] = useState<Menu[]>([]);
   const [loading, setLoading] = useState(false);
 

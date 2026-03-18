@@ -1,6 +1,5 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Card, Tag, Button, Space, Select, Upload, message } from 'antd';
+import { Table, Card, Tag, Button, Space, Select, Upload, App } from 'antd';
 import { PlusOutlined, ImportOutlined, DownloadOutlined } from '@ant-design/icons';
 import * as XLSX from 'xlsx';
 import { attendanceService } from '../../services/attendanceService';
@@ -9,6 +8,7 @@ import { AttendanceRequest as RequestType } from '../../types';
 const { Option } = Select;
 
 const AttendanceRequest: React.FC = () => {
+  const { message } = App.useApp();
   const [dataSource, setDataSource] = useState<RequestType[]>([]);
   const [loading, setLoading] = useState(false);
 

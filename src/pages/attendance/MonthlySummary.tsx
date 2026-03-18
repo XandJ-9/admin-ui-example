@@ -1,11 +1,11 @@
-// @ts-nocheck
 import React, { useState, useEffect } from 'react';
-import { Table, Card, DatePicker, Space, Button, message } from 'antd';
+import { Table, Card, DatePicker, Space, Button, App } from 'antd';
 import dayjs from 'dayjs';
 import { attendanceService } from '../../services/attendanceService';
 import { MonthlySummaryRecord } from '../../types';
 
 const MonthlySummary: React.FC = () => {
+  const { message } = App.useApp();
   const [data, setData] = useState<MonthlySummaryRecord[]>([]);
   const [loading, setLoading] = useState(false);
 

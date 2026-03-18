@@ -3,6 +3,10 @@ import { createServer as createViteServer } from "vite";
 import Database from "better-sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
+import morgan from "morgan";
+import sourceMapSupport from "source-map-support";
+
+sourceMapSupport.install();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -56,6 +60,8 @@ async function startServer() {
   const app = express();
   const PORT = 3000;
 
+  // Use morgan for HTTP logging
+  app.use(morgan("dev"));
   app.use(express.json());
 
   // API Routes
